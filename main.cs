@@ -9,6 +9,7 @@ class MainClass {
     teste.CadastrarProdutos();
     int menu = 100;
     string continuar = "SIM";
+    int exit=0;
 
     do{
       Console.Clear();
@@ -55,32 +56,84 @@ class MainClass {
             break;
           }
 
-          Console.Clear();
-          Console.WriteLine("VOCE ESCOLHEU :    \n--------------------------------");
-          Console.WriteLine("COD:{0} - ITEM:{1} \nESTOQUE:{2} - PREÇO:R${3}\n----------------------------- ",teste.lista[opcao_int].GetId() , teste.lista[opcao_int].GetNome(), teste.lista[opcao_int].GetQtd(),teste.lista[opcao_int].GetPreco());
-
-          //usuario escolhe qtd
-          Console.Write("ESCOLHA A QUANTIDADE QUE DESEJA:  ");
           
-          int qtd = int.Parse(Console.ReadLine());
+          //TESTE PARA TENTAR INCLUIR 2VEZES O MESMO ITEM.... N MEXER
+          for(int y=0 ; y< carrinho.MeuCarrinho.Count  ; y++){
+            if(carrinho.MeuCarrinho[y].GetId() == opcao){
+              Console.Clear();
+              Console.WriteLine("ESTE ITEM JÁ ESTA NO CARRINHO, ATUALIAR QUANTIDADE? (S/N)");
+              continuar = Console.ReadLine();
+              while(continuar!="S" && continuar!="N"){
+                Console.Clear();
+                Console.WriteLine("OPÇÃO INVALIDA, ESCOLHA UMA ENTRE AS OPCOES");
+                Console.WriteLine("DESEJA ATUALIAR QUANTIDADE ? (S/N):  ");
+                continuar = Console.ReadLine();
+              }
+              if(continuar=="N") {
+                exit = 1;
+                continuar = "N";
+                break;
+              }
+              if(continuar=="S"){
+                Console.Clear(); 
+                Console.Write("ESCOLHA A QUANTIDADE QUE DESEJA:  ");
+                int qtd = int.Parse(Console.ReadLine());
 
-          if(teste.IncluirCarrinho(opcao,qtd)){
-            carrinho.MeuCarrinho.Add(teste.lista[opcao_int]);
-            carrinho.AtualizaQtd(opcao,qtd); 
-            carrinho.VisualizarCarrinho("Caio");  
+                if(true){
+                  Console.Clear(); 
+                  carrinho.AtualizaQtd(opcao,qtd);
+                  carrinho.VisualizarCarrinho("Caio");
+                  Console.ReadLine();
+                  continuar = "N";
+                  exit = 1;
+                  break;
+                }
+                else{
+                  Console.Clear(); 
+                  Console.WriteLine("QUANTIDADE ESCOLHIDA NÃO PERMITIDA");
+                  Console.ReadLine();
+                  exit = 1;
+                  continuar = "N";
+                  menu=1000;
+                  break;
+                }
+              }
+            }   
           }
 
-          Console.WriteLine("DESEJA ESCOLHER OUTRO ITEM ? (S/N):  ");
-          continuar = Console.ReadLine();
-
-          while(continuar!="S" && continuar!="N"){
+          if(exit==0){
             Console.Clear();
-            Console.WriteLine("OPÇÃO INVALIDA, ESCOLHA UMA ENTRE AS OPCOES");
+            Console.WriteLine("VOCE ESCOLHEU :    \n--------------------------------");
+            Console.WriteLine("COD:{0} - ITEM:{1} \nESTOQUE:{2} - PREÇO:R${3}\n----------------------------- ",teste.lista[opcao_int].GetId() , teste.lista[opcao_int].GetNome(), teste.lista[opcao_int].GetQtd(),teste.lista[opcao_int].GetPreco());
+
+            //usuario escolhe qtd
+            Console.Write("ESCOLHA A QUANTIDADE QUE DESEJA:  ");
+          
+            int qtd = int.Parse(Console.ReadLine());
+
+            if(teste.IncluirCarrinho(opcao,qtd)){
+              carrinho.MeuCarrinho.Add(teste.lista[opcao_int]);
+              carrinho.AtualizaQtd(opcao,qtd); 
+              carrinho.VisualizarCarrinho("Caio");  
+            }else{
+              Console.WriteLine("QUANTIDADE ESCOLHIDA NÃO PERMITIDA");      
+              Console.ReadLine();
+              break;
+            }
+
             Console.WriteLine("DESEJA ESCOLHER OUTRO ITEM ? (S/N):  ");
             continuar = Console.ReadLine();
-          }
 
+            while(continuar!="S" && continuar!="N"){
+              Console.Clear();
+              Console.WriteLine("OPÇÃO INVALIDA, ESCOLHA UMA ENTRE AS OPCOES");
+              Console.WriteLine("DESEJA ESCOLHER OUTRO ITEM ? (S/N):  ");
+              continuar = Console.ReadLine();
+            }
+          }
+          Console.Clear();
         }while(continuar == "S");
+        Console.Clear();
       }
 
       if(menu==2){
