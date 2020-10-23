@@ -168,24 +168,22 @@ class MainClass {
                 Console.Write("ESCOLHA A QUANTIDADE QUE DESEJA:  ");
                 int qtd = int.Parse(Console.ReadLine());
 
-                if(true){
-                  Console.Clear(); 
+                if(teste.IncluirCarrinho(opcao,qtd)){
+                            
                   carrinho.AtualizaQtd(opcao,qtd);
+                  carrinho.MeuCarrinho[y].SetQtd(qtd); 
                   carrinho.VisualizarCarrinho(name);
-                  Console.ReadLine();
-                  continuar = "N";
                   exit = 1;
-                  break;
-                }
-                else{
-                  Console.Clear(); 
-                  Console.WriteLine("QUANTIDADE ESCOLHIDA NÃO PERMITIDA");
+                  continuar = "N";
+                  break;  
+                }else{
+                  Console.WriteLine("QUANTIDADE ESCOLHIDA NÃO PERMITIDA");      
                   Console.ReadLine();
                   exit = 1;
                   continuar = "N";
-                  menu=1000;
                   break;
                 }
+                
               }
             }   
           }
