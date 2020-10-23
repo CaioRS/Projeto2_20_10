@@ -1,9 +1,5 @@
 using System;
 
-
-/*Achei um erro, a qual quando a pessoa escolhe a quantide do item desejado, quando ela vai escolher outro, oque ela tinha escolido antes atribui no estoque a quantidade que ela escolheu, ao inves de diminuir a quantidade ESCOLHIDA. */
-
-
 class MainClass {
   public static void Main (string[] args) {
 
@@ -118,7 +114,8 @@ class MainClass {
 
       if(menu==0){
         Console.Clear();
-        Console.WriteLine("VOLTE SEMPRE !!!");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("VOLTE SEMPRE {0}!!!", name);
         Console.ReadLine();
         return ;
       }
@@ -146,7 +143,7 @@ class MainClass {
           }
 
           
-          //TESTE PARA TENTAR INCLUIR 2VEZES O MESMO ITEM.... N MEXER
+          
           for(int y=0 ; y< carrinho.MeuCarrinho.Count  ; y++){
             if(carrinho.MeuCarrinho[y].GetId() == opcao){
               Console.Clear();
@@ -208,7 +205,9 @@ class MainClass {
               carrinho.MeuCarrinho[rot].SetQtd(qtd); 
               carrinho.VisualizarCarrinho(name);  
             }else{
-              Console.WriteLine("QUANTIDADE ESCOLHIDA NÃO PERMITIDA");      
+              Console.ForegroundColor = ConsoleColor.Red;
+              Console.WriteLine("QUANTIDADE ESCOLHIDA NÃO PERMITIDA,QUANTIDADE MAIOR QUE O ESTOQUE!");
+              Console.ForegroundColor = ConsoleColor.White;      
               Console.ReadLine();
               break;
             }
@@ -218,7 +217,9 @@ class MainClass {
 
             while(continuar!="S" && continuar!="N"){
               Console.Clear();
-              Console.WriteLine("OPÇÃO INVALIDA, ESCOLHA UMA ENTRE AS OPCOES");
+              Console.ForegroundColor = ConsoleColor.Red;
+              Console.WriteLine("OPÇÃO INVALIDA, ESCOLHA UMA ENTRE AS OPCOES.");
+              Console.ForegroundColor = ConsoleColor.White;
               Console.WriteLine("DESEJA ESCOLHER OUTRO ITEM ? (S/N):  ");
               continuar = Console.ReadLine();
             }
@@ -259,13 +260,18 @@ class MainClass {
             }
           }
           Console.Clear();
+          Console.ForegroundColor = ConsoleColor.Green;
           Console.WriteLine("COMPRA FEITA COM SUCESSO, NOVO SALDO NA CARTEIRA: R$ {0}",valorcarteira-valorcarrinho);
           valorcarteira = valorcarteira - valorcarrinho;
-          cliente.SetCarteira(valorcarteira);
+          cliente.AtualizaCarteira(valorcarteira);
+          Console.ForegroundColor = ConsoleColor.White;
+          Console.ReadLine();
           carrinho.MeuCarrinho.Clear();
         }else{
           Console.Clear();
+          Console.ForegroundColor = ConsoleColor.Red;
           Console.WriteLine("SALDO INSUFICIENTE EM CARTEIRA, FAVOR ADICIONAR SALDO");
+          Console.ForegroundColor = ConsoleColor.White;
           Console.ReadLine();
         }
       }

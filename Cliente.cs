@@ -47,18 +47,27 @@ class Cliente{
   private double Carteira;
   public void SetCarteira(double R){
     if (R<=200.00){
-      Carteira = R;
+      Carteira += R;
       Console.Clear();
+      Console.ForegroundColor = ConsoleColor.Green;
       Console.WriteLine("Valor incluido com sucesso !");
-      Console.WriteLine("Novo saldo na Carteira Virtual : R$ {0}",R);
+      Console.WriteLine("Novo saldo na Carteira Virtual : R$ {0}",Carteira);
+      Console.ForegroundColor = ConsoleColor.White;
       Console.ReadLine();
     }else{
       Console.Clear();
+      Console.ForegroundColor = ConsoleColor.Red;
       Console.WriteLine("Valor Indisponível de inclusão.... Valor Limite R$ 200.00");
+      Console.ForegroundColor = ConsoleColor.White;
       Console.ReadLine();
     }
 
   }
+
+  public void AtualizaCarteira(double R){
+    Carteira = R;
+  }
+
   public double getCarteira(){
     return Carteira;
   }
