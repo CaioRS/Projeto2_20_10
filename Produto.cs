@@ -17,9 +17,7 @@ class Produto{
 
   // set e gets para acessar atributos privates
   public void SetQtd(int q){
-    if(q>=0){ // apenas permitir a alteração se a quantidade não for negativa
-      qtd = q;
-    }
+    this.qtd = q;
   }
 
   public int GetQtd(){

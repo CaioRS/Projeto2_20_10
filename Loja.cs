@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 
 class Loja{
   //declaração de atributos
@@ -70,16 +71,11 @@ class Loja{
     }
   }
   
-  //Corrigir essa Função
-  /*public void AtualizarEstoque(string i, int q){
-    if(q > 0){ //apenas roda se a qtd selecionada for maior que 0
-      for (int x=0;x<lista.Count;x++){ // roda a lista atras do mesmo ID do Produto
-        if(lista[x].GetId() == i) { 
-          if(lista[x].GetQtd() >= q){ // verifica a quantidade que desaja vs estoque
-            lista[x].SetQtd(q);
-          }  
-        }
-      }
-    }
-  }*/
+  
+  //public int AtualizarEstoque(string idlista, string idcarrinho , int qtdlista , int qtdcarrinho){
+    
+    
+        
+    
+  //}  
 }

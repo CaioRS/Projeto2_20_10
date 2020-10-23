@@ -20,6 +20,17 @@ class Carrinho{
     }
     Console.WriteLine("SUB-TOTAL DO CARRINHO: R$ {0}",valor);
   }
+  
+  public double ValorCarrinho(){
+    double valor=0;
+    for (int x=0;x<MeuCarrinho.Count;x++){
+      Console.WriteLine("COD:{0} - ITEM:{1} \nQTD:{2} - PREÇO:R${3}\n----------------------------- ",MeuCarrinho[x].GetId() , MeuCarrinho[x].GetNome(), MeuCarrinho[x].GetQtd(), MeuCarrinho[x].GetPreco() );
+
+      valor = valor + (MeuCarrinho[x].GetPreco()*MeuCarrinho[x].GetQtd());
+    }
+    return valor;
+  }
+
 
   public void AtualizaQtd(string cod, int q){
     for(int x=0;x<MeuCarrinho.Count;x++){
@@ -28,8 +39,6 @@ class Carrinho{
       }
     }
   }
-
-
 
 
 
