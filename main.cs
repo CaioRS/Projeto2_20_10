@@ -102,13 +102,14 @@ class MainClass {
       Console.WriteLine("   3 PARA ADICIONAR SALDO A CARTEIRA");
       Console.WriteLine("   4 PARA FINALIZAR COMPRA");
       Console.WriteLine("   5 PARA VISUALIZAR SUA CARTEIRA");
+      Console.WriteLine("   6 PARA RETIRAR UM ITEM DO CARRINHO");
       Console.WriteLine("   0 PARA FECHAR O APLICATIVO");
       Console.ForegroundColor = ConsoleColor.White;
       Console.Write("DIGITE SUA ESCOLHA:  ");
 
       menu = int.Parse(Console.ReadLine());
 
-      if(menu!=0 && menu!=1 && menu!=2 && menu!=3 && menu !=4 && menu != 5 && menu!=1000 ){
+      if(menu!=0 && menu!=1 && menu!=2 && menu!=3 && menu !=4 && menu != 5 && menu!=1000 && menu != 6){
         Console.Clear();
         Console.WriteLine("OPÇÃO INVALIDA, ESCOLHA UMA ENTRE AS OPCOES");
         menu = 1000;
@@ -249,7 +250,7 @@ class MainClass {
         Console.Clear();
         double valorcarrinho = carrinho.ValorCarrinho();
         double valorcarteira = cliente.getCarteira();
-        if(valorcarteira>=valorcarrinho){
+        if(valorcarteira>=valorcarrinho && carrinho.MeuCarrinho.Count != 0){
           for(int i=0 ; i<carrinho.MeuCarrinho.Count ; i++){
             for(int y=0; y<teste.lista.Count; y++){
               string idlista = teste.lista[y].GetId();
@@ -263,6 +264,7 @@ class MainClass {
             }
           }
           Console.Clear();
+          carrinho.VisualizarCarrinho(name);
           Console.ForegroundColor = ConsoleColor.Green;
           Console.WriteLine("COMPRA FEITA COM SUCESSO, NOVO SALDO NA CARTEIRA: R$ {0}",valorcarteira-valorcarrinho);
           valorcarteira = valorcarteira - valorcarrinho;
@@ -270,10 +272,19 @@ class MainClass {
           Console.ForegroundColor = ConsoleColor.White;
           Console.ReadLine();
           carrinho.MeuCarrinho.Clear();
-        }else{
+
+        }else if(carrinho.MeuCarrinho.Count == 0){
           Console.Clear();
           Console.ForegroundColor = ConsoleColor.Red;
-          Console.WriteLine("SALDO INSUFICIENTE EM CARTEIRA, FAVOR ADICIONAR SALDO");
+          Console.WriteLine("CARRINHO VAZIO! ADICIONE ALGO PARA FINALIZAR A COMPRA.");
+          Console.ForegroundColor = ConsoleColor.White;
+          Console.ReadLine();
+
+        }else{
+          Console.Clear();
+          carrinho.VisualizarCarrinho(name);
+          Console.ForegroundColor = ConsoleColor.Red;
+          Console.WriteLine("SALDO INSUFICIENTE EM CARTEIRA, FAVOR ADICIONAR SALDO.");
           Console.ForegroundColor = ConsoleColor.White;
           Console.ReadLine();
         }
@@ -283,6 +294,28 @@ class MainClass {
         Console.Clear();
         Console.WriteLine("Sua carteira está com um saldo atual de R${0}", cliente.getCarteira());
         Console.ReadLine();
+      }
+
+      if(menu==6){
+        Console.Clear();
+        if(carrinho.MeuCarrinho.Count != 0){
+          carrinho.VisualizarCarrinho(name);
+          Console.Write("\nInsira o código do produto a ser removido  do carrinho >> ");
+          string cod = Console.ReadLine();
+          carrinho.RemoverItem(cod);
+          Console.ForegroundColor = ConsoleColor.Green;
+          Console.WriteLine("Item {0} removido com Sucesso!", cod);
+          Console.ForegroundColor = ConsoleColor.White;
+          Console.ReadLine();
+
+        }else{
+          Console.ForegroundColor = ConsoleColor.Red;
+          Console.WriteLine("Carrinho vazio! Não há itens para remover.");
+          Console.ForegroundColor = ConsoleColor.White;
+          Console.ReadLine();   
+        }
+        
+
       }
 
     }while (menu!=0);

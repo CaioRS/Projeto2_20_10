@@ -40,6 +40,14 @@ class Carrinho{
     }
   }
 
+  public void RemoverItem(string id){
+    for(int i=0 ; i<MeuCarrinho.Count; i++){
+        if(id == MeuCarrinho[i].GetId()){
+           MeuCarrinho.RemoveAt(i);
+        } 
+    }
+}
+
 
 
 
